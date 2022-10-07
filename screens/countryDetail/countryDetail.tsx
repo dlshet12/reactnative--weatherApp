@@ -1,29 +1,83 @@
 import React from "react";
-import { View, Text, SafeAreaView, Image } from "react-native";
+import { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import TouchableButton from "../../components/button/button";
 import styles from "./countryDetailstyles";
 export default function CountryDetail({ navigation, route }: any) {
-  const { props: data } = route.params;
-  console.log("recived prop", data);
-  const navigateToCountryWeatherDetail = () => {
-    navigation.navigate("weatherDetail");
+  const data = route.params;
+  const country = data.name.common;
+  const flag = data.flags.png;
+  const capital = data.capital;
+  const population = data.population;
+  const status = String(data.latlng);
+
+  const API_KEY = "4571128c714d723ce68e0414b2ab96a0";
+  const URL = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${capital[0]}`;
+  const [loading, setLoading] = useState(false);
+
+  const navigateToCountryWeatherDetail = async () => {
+    setLoading(true);
+    try {
+      const weatherinfo = await fetch(URL);
+
+      if (weatherinfo.status === 200) {
+        const weatherstatus = await weatherinfo.json();
+        setLoading(false);
+
+        navigation.navigate("weatherDetail", weatherstatus);
+      } else {
+        setLoading(false);
+        console.log("country details not available");
+      }
+    } catch (err) {
+      setLoading(false);
+      console.log("fail to load");
+    }
   };
   return (
     <View style={styles.countryContainer}>
+      {loading ? (
+        <View style={styles.overlaycolor}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <View />
+      )}
+
       <View style={styles.topBar}>
         <View style={styles.SubTopBar}>
-          <Image source={require("../../assets/Vector.png")}></Image>
-          <Text style={styles.topBarText}>America</Text>
+          <TouchableOpacity onPress={navigation.goBack}>
+            <Image source={require("../../assets/Vector.png")}></Image>
+          </TouchableOpacity>
+          <Text style={styles.topBarText}>{country}</Text>
         </View>
       </View>
-      <Image
-        source={require("../../assets/in.png")}
-        style={styles.countryFlag}
-      ></Image>
+      <Image source={{ uri: flag }} style={styles.countryFlag}></Image>
       <View style={styles.infoContainer}>
-        <View style={styles.capitalField}></View>
-        <View style={styles.populationField}></View>
-        <View style={styles.latitudeField}></View>
+        <View style={styles.capitalField}>
+          <Text style={styles.fontstyle}>
+            Capital{"\n"}
+            {capital}
+          </Text>
+        </View>
+        <View style={styles.populationField}>
+          <Text style={styles.fontstyle}>
+            Population{"\n"}
+            {population}
+          </Text>
+        </View>
+        <View style={styles.latitudeField}>
+          <Text style={styles.fontstyle}>
+            Latitude,Longitude{"\n"}
+            {status}
+          </Text>
+        </View>
       </View>
       <TouchableButton
         text="Check Weather"

@@ -1,7 +1,18 @@
-import { View, Text, Image } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./weatherDetailStyles";
-export default function WeatherDetail() {
-  const isCoolTheme = true;
+export default function WeatherDetail({ navigation, route }: any) {
+  const info = route.params;
+  const temperature = info.current.temperature;
+  const isCoolTheme = temperature > 25 ? false : true;
+  const capital = info.location.name;
+  const precipitation = info.current.precip;
+  const windspeed = info.current.wind_speed;
 
   return (
     <View style={styles.weatherContainer}>
@@ -12,26 +23,69 @@ export default function WeatherDetail() {
         }}
       >
         <View style={styles.subWeatherTopBar}>
-          <Image source={require("../../assets/Vector.png")}></Image>
-          <Text style={styles.weatherTopBarText}>paris</Text>
+          <TouchableOpacity onPress={navigation.goBack}>
+            <Image source={require("../../assets/Vector.png")}></Image>
+          </TouchableOpacity>
+          <Text style={styles.weatherTopBarText}>{capital}</Text>
         </View>
       </View>
-      <Image
+      <ImageBackground
         source={
           isCoolTheme
             ? require("../../assets/cold1.png")
             : require("../../assets/warmTheme.png")
         }
         style={styles.backgroundColdImage}
-      ></Image>
-      <View
-        style={{
-          ...styles.displayClimate,
-          backgroundColor: isCoolTheme ? "#014D8F" : "#C95159",
-        }}
       >
-        <View style={styles.climatetextField}></View>
-      </View>
+        <Text
+          style={{ ...styles.temp, color: isCoolTheme ? "#1B68A9" : "#C95159" }}
+        >
+          {temperature}
+          <Image
+            source={
+              isCoolTheme
+                ? require("../../assets/C.png")
+                : require("../../assets/c2.png")
+            }
+          ></Image>
+        </Text>
+        <View
+          style={{
+            ...styles.displayClimate,
+            backgroundColor: isCoolTheme ? "#014D8F" : "#C95159",
+          }}
+        >
+          <View style={styles.climatetextField}>
+            <View style={styles.windstyle}>
+              <View style={styles.row}>
+                <View style={styles.icon}>
+                  <Image source={require("../../assets/rain.png")}></Image>
+                </View>
+                <View>
+                  <Text style={styles.textstyle}> PRECIPITATION</Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.textstyle}>{precipitation} </Text>
+              </View>
+            </View>
+
+            <View style={styles.windstyle}>
+              <View style={styles.row}>
+                <View style={styles.icon}>
+                  <Image source={require("../../assets/windspeed.png")}></Image>
+                </View>
+                <View>
+                  <Text style={styles.textstyle}> Wind Speed</Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.textstyle}>{windspeed} </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 }

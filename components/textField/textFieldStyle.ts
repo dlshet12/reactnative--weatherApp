@@ -9,6 +9,7 @@ const textFieldStyles = StyleSheet.create({
     padding: 20,
     color: "white",
     margin: 4,
+    cursor: "pointer",
   },
 });
 export default textFieldStyles;

@@ -5,8 +5,6 @@ const buttonStyle = StyleSheet.create({
     backgroundColor: "#F8666E",
     width: "100%",
     display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
     padding: 20,
     borderRadius: 5,
     margin: 4,
@@ -14,6 +12,8 @@ const buttonStyle = StyleSheet.create({
   buttonText: {
     color: "#FFFFFF",
     fontWeight: "bold",
+    justifyContent: "center",
+    textAlign: "center",
   },
 });
 export default buttonStyle;

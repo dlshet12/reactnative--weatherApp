@@ -15,6 +15,20 @@ const countryDetailStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
   },
+  overlaycolor: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0.8,
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+    top: 0,
+    bottom: 0,
+    zIndex: 9,
+  },
   SubTopBar: {
     height: "80%",
     width: "90%",
@@ -30,13 +44,14 @@ const countryDetailStyles = StyleSheet.create({
     fontWeight: "bold",
   },
   countryFlag: {
-    marginTop: "15%",
+    marginTop: "10%",
     aspectRatio: 3 / 2,
     width: "100%",
     backgroundColor: "white",
   },
   infoContainer: {
     marginTop: "10%",
+    marginBottom: "10%",
     display: "flex",
     flexDirection: "column",
     backgroundColor: "black",
@@ -44,23 +59,28 @@ const countryDetailStyles = StyleSheet.create({
     width: "80%",
     justifyContent: "space-between",
   },
+  fontstyle: {
+    fontSize: 15,
+    marginLeft: 10,
+    color: "white",
+  },
   capitalField: {
     height: "30%",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#1F272E",
     borderRadius: 8,
+    justifyContent: "center",
   },
   populationField: {
     height: "30%",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#1F272E",
     borderRadius: 8,
+    justifyContent: "center",
   },
   latitudeField: {
     height: "30%",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#1F272E",
     borderRadius: 8,
-  },
-  checkWeatherButton: {
-    padding: 10,
+    justifyContent: "center",
   },
 });
 export default countryDetailStyles;
