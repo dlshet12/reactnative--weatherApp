@@ -63,6 +63,7 @@ const weatherDetailStyles = StyleSheet.create({
   row: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
   windstyle: {
     display: "flex",

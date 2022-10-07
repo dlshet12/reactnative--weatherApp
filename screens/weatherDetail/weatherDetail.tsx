@@ -52,9 +52,7 @@ export default function WeatherDetail({ navigation, route }: any) {
           <View style={styles.climatetextField}>
             <View style={styles.windstyle}>
               <View style={styles.row}>
-                <View style={styles.icon}>
-                  <Image source={require("../../assets/rain.png")}></Image>
-                </View>
+                <Image source={require("../../assets/rain.png")}></Image>
                 <View>
                   <Text style={styles.textstyle}> PRECIPITATION</Text>
                 </View>
@@ -66,9 +64,7 @@ export default function WeatherDetail({ navigation, route }: any) {
 
             <View style={styles.windstyle}>
               <View style={styles.row}>
-                <View style={styles.icon}>
-                  <Image source={require("../../assets/windspeed.png")}></Image>
-                </View>
+                <Image source={require("../../assets/windspeed.png")}></Image>
                 <View>
                   <Text style={styles.textstyle}> Wind Speed</Text>
                 </View>
