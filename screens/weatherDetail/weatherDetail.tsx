@@ -5,7 +5,9 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import TopBar from "../../components/topBar/topBar";
 import styles from "./weatherDetailStyles";
+
 export default function WeatherDetail({ navigation, route }: any) {
   const info = route.params;
   const temperature = info.current.temperature;
@@ -16,19 +18,11 @@ export default function WeatherDetail({ navigation, route }: any) {
 
   return (
     <View style={styles.weatherContainer}>
-      <View
-        style={{
-          ...styles.weatherTopBar,
-          backgroundColor: isCoolTheme ? "#014D8F" : "#C95159",
-        }}
-      >
-        <View style={styles.subWeatherTopBar}>
-          <TouchableOpacity onPress={navigation.goBack}>
-            <Image source={require("../../assets/Vector.png")}></Image>
-          </TouchableOpacity>
-          <Text style={styles.weatherTopBarText}>{capital}</Text>
-        </View>
-      </View>
+      <TopBar
+        bgColor={isCoolTheme ? "#014D8F" : "#C95159"}
+        onBackPress={navigation.goBack}
+        title={capital}
+      ></TopBar>
       <ImageBackground
         source={
           isCoolTheme

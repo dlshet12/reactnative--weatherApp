@@ -17,6 +17,7 @@ export default function Home({ navigation }: any) {
 
   const navigateToCountryDetail = async () => {
     setLoading(true);
+    setError("");
 
     try {
       const countryinfo = await fetch(
@@ -35,7 +36,7 @@ export default function Home({ navigation }: any) {
     } catch (err) {
       setLoading(false);
       setError("fail to load");
-      console.log("fail to load");
+      console.log(err);
     }
   };
 
@@ -48,7 +49,7 @@ export default function Home({ navigation }: any) {
     <View style={styles.mainContainer}>
       {loading ? (
         <View style={styles.overlay}>
-          <ActivityIndicator />
+          <ActivityIndicator color="#F8666E" />
         </View>
       ) : (
         <View />

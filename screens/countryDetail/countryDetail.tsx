@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
+import TopBar from "../../components/topBar/topBar";
 import TouchableButton from "../../components/button/button";
 import styles from "./countryDetailstyles";
 export default function CountryDetail({ navigation, route }: any) {
@@ -16,7 +17,6 @@ export default function CountryDetail({ navigation, route }: any) {
   const capital = data.capital;
   const population = data.population;
   const status = String(data.latlng);
-
   const API_KEY = "4571128c714d723ce68e0414b2ab96a0";
   const URL = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${capital[0]}`;
   const [loading, setLoading] = useState(false);
@@ -49,15 +49,11 @@ export default function CountryDetail({ navigation, route }: any) {
       ) : (
         <View />
       )}
-
-      <View style={styles.topBar}>
-        <View style={styles.SubTopBar}>
-          <TouchableOpacity onPress={navigation.goBack}>
-            <Image source={require("../../assets/Vector.png")}></Image>
-          </TouchableOpacity>
-          <Text style={styles.topBarText}>{country}</Text>
-        </View>
-      </View>
+      <TopBar
+        title={country}
+        onBackPress={navigation.goBack}
+        bgColor="#000A12"
+      ></TopBar>
       <Image source={{ uri: flag }} style={styles.countryFlag}></Image>
       <View style={styles.infoContainer}>
         <View style={styles.capitalField}>
